@@ -8,15 +8,21 @@ export const palette = {
     development: "#c474e1"
   },
   background: {
+    primary: "#e3e5e6",
+    secondary: "#ebebeb",
     page: "#edeff1",
-    card: "#ffffff",
-    otherMonthCard: "#ebebeb",
-    currentMonthCard: "#e3e5e6"
+    card: "#ffffff"
   },
   text: {
-    otherMonthText: "#868686",
-    currentMonthText: "#4c4e50",
+    primary: "#4c4e50",
+    secondary: "#868686",
     calendarTitle: "#31353a",
     taskText: "#404040"
+  },
+  accent: {
+    main: "#e95420",
+    transparent25: "rgba(233, 84, 32, 0.25)",
+    transparent50: "rgba(233, 84, 32, 0.50)",
+    transparent75: "rgba(233, 84, 32, 0.75)"
   }
 };

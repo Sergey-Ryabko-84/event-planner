@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
+    "jsxImportSource": "@emotion/react",
     "jsx": "react-jsx",
 
     /* Linting */
@@ -20,7 +21,17 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@common/*": ["src/common/*"],
+      "@common": ["src/common"],
+      "@components/*": ["src/components/*"],
+      "@components": ["src/components"],
+      "@styles/*": ["src/styles/*"],
+      "@styles": ["src/styles"],
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src/**/*"]
 }

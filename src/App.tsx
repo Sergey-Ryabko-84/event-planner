@@ -1,12 +1,14 @@
 import { Global } from "@emotion/react";
 import { globalStyles } from "./styles";
+import { Calendar } from "@components/Calendar";
+import { MainWrapper } from "./App.styles";
 
 function App() {
   return (
-    <div style={{ display: "flex" }}>
+    <MainWrapper>
       <Global styles={globalStyles} />
-      <h1>Event Planner</h1>
-    </div>
+      <Calendar />
+    </MainWrapper>
   );
 }
 

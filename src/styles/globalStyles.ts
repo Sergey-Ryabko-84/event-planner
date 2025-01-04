@@ -1,5 +1,5 @@
-/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { palette } from "./palette";
 
 export const globalStyles = css`
   * {
@@ -10,7 +10,7 @@ export const globalStyles = css`
 
   body {
     font-family: Arial, sans-serif;
-    background-color: #fafafa;
+    background-color: ${palette.background.page};
     color: #333;
   }
 
