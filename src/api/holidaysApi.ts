@@ -24,7 +24,7 @@ export const fetchNextHolidaysWorldwide = async (): Promise<HolidayType[]> => {
 export const fetchCountries = async (): Promise<CountryType[]> => {
   const response = await fetch(`${apiUrl}/AvailableCountries`);
   if (!response.ok) {
-    throw new Error(`Failed to fetch holidays: ${response.statusText}`);
+    throw new Error(`Failed to fetch countries: ${response.statusText}`);
   }
   return response.json();
 };

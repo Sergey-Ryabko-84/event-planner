@@ -1,6 +1,7 @@
 import { Container } from "./Calendar.styles";
 import { CalendarGrid, Header, useCalendarDays, useCurrentDate, WeekDays } from "./calendar";
 import { HolidaySwitcher, useHolidaySettings } from "./holidays";
+import { TaskProvider } from "./tasks";
 
 export const Calendar = () => {
   const { currentDate, goToNextMonth, goToPreviousMonth } = useCurrentDate();
@@ -21,7 +22,9 @@ export const Calendar = () => {
         changeCountry={changeCountry}
       />
       <WeekDays />
-      <CalendarGrid days={days} />
+      <TaskProvider>
+        <CalendarGrid days={days} />
+      </TaskProvider>
     </Container>
   );
 };
