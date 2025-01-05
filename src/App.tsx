@@ -1,6 +1,6 @@
 import { Global } from "@emotion/react";
-import { globalStyles } from "./styles";
-import { Calendar } from "@components/Calendar";
+import { globalStyles } from "@styles/globalStyles";
+import { Calendar } from "@components";
 import { MainWrapper } from "./App.styles";
 
 function App() {

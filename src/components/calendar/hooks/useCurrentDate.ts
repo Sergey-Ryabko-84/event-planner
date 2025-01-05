@@ -7,7 +7,7 @@ type Return = {
   goToPreviousMonth: () => void;
 };
 
-export const useCalendarState = (): Return => {
+export const useCurrentDate = (): Return => {
   const [currentDate, setCurrentDate] = useState(dayjs());
 
   const goToNextMonth = () => {

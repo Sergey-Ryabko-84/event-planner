@@ -22,6 +22,7 @@ export const palette = {
   accent: {
     main: "#e95420",
     transparent25: "rgba(233, 84, 32, 0.25)",
+    transparent35: "rgba(233, 84, 32, 0.35)",
     transparent50: "rgba(233, 84, 32, 0.50)",
     transparent75: "rgba(233, 84, 32, 0.75)"
   }

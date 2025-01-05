@@ -28,6 +28,8 @@
       "@common": ["src/common"],
       "@components/*": ["src/components/*"],
       "@components": ["src/components"],
+      "@api/*": ["src/api/*"],
+      "@api": ["src/api"],
       "@styles/*": ["src/styles/*"],
       "@styles": ["src/styles"],
       "@/*": ["./src/*"]

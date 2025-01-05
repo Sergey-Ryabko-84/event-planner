@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import dayjs from "dayjs";
+import { HolidayModeType, useHolidays } from "@components/holidays/hooks";
 import { getDisplayValue } from "../utils/getDisplayValue";
 
 export type CalendarDayType = {
@@ -7,9 +8,16 @@ export type CalendarDayType = {
   isCurrentMonth: boolean;
   isToday: boolean;
   displayValue: string;
+  holidays: string[];
 };
 
-export const useCalendarDays = (currentDate: dayjs.Dayjs): CalendarDayType[] => {
+export const useCalendarDays = (
+  currentDate: dayjs.Dayjs,
+  mode: HolidayModeType,
+  selectedCountry: string
+): CalendarDayType[] => {
+  const { holidays, loading } = useHolidays(currentDate, mode, selectedCountry);
+
   return useMemo(() => {
     const startOfMonth = currentDate.startOf("month");
     const endOfMonth = currentDate.endOf("month");
@@ -24,7 +32,8 @@ export const useCalendarDays = (currentDate: dayjs.Dayjs): CalendarDayType[] => 
         date,
         isCurrentMonth: false,
         isToday: false,
-        displayValue: getDisplayValue(date, isFirst, isLast)
+        displayValue: getDisplayValue(date, isFirst, isLast),
+        holidays: holidays[date.format("YYYY-MM-DD")] || []
       };
     });
 
@@ -36,7 +45,8 @@ export const useCalendarDays = (currentDate: dayjs.Dayjs): CalendarDayType[] => 
         date,
         isCurrentMonth: true,
         isToday: date.isSame(dayjs(), "day"),
-        displayValue: getDisplayValue(date, isFirst, isLast)
+        displayValue: getDisplayValue(date, isFirst, isLast),
+        holidays: holidays[date.format("YYYY-MM-DD")] || []
       };
     });
 
@@ -49,10 +59,11 @@ export const useCalendarDays = (currentDate: dayjs.Dayjs): CalendarDayType[] => 
         date,
         isCurrentMonth: false,
         isToday: false,
-        displayValue: getDisplayValue(date, isFirst, isLast)
+        displayValue: getDisplayValue(date, isFirst, isLast),
+        holidays: holidays[date.format("YYYY-MM-DD")] || []
       };
     });
 
     return [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
-  }, [currentDate]);
+  }, [currentDate, holidays, loading]);
 };

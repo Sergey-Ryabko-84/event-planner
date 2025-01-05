@@ -14,4 +14,24 @@ export const StyledCell = styled.div<{ isCurrentMonth: boolean; isToday: boolean
         : palette.background.secondary};
   color: ${({ isCurrentMonth }) =>
     isCurrentMonth ? palette.text.primary : palette.text.secondary};
+
+  max-height: 16.5vh;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  :hover {
+    background-color: ${({ isToday }) => (isToday ? palette.accent.transparent35 : "#dadcdd")};
+  }
 `;

@@ -1,4 +1,5 @@
 import { Dayjs } from "dayjs";
+import { Button } from "@common/ui";
 import { Container } from "./Header.styles";
 
 type Props = {
@@ -10,9 +11,9 @@ type Props = {
 export const Header = ({ currentDate, goToNextMonth, goToPreviousMonth }: Props) => {
   return (
     <Container>
-      <button onClick={goToPreviousMonth}>{"<"}</button>
+      <Button onClick={goToPreviousMonth}>{"<"}</Button>
       <span>{currentDate.format("MMMM YYYY")}</span>
-      <button onClick={goToNextMonth}>{">"}</button>
+      <Button onClick={goToNextMonth}>{">"}</Button>
     </Container>
   );
 };

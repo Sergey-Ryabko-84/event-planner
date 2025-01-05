@@ -1,4 +1,5 @@
 import { StyledCell } from "./CalendarCell.styles";
+import { HolidayList } from "@components/holidays";
 import { CalendarDayType } from "../../hooks";
 
 type Props = {
@@ -6,11 +7,12 @@ type Props = {
 };
 
 export const CalendarCell = ({ day }: Props) => {
-  const { isCurrentMonth, isToday, displayValue } = day;
+  const { isCurrentMonth, isToday, displayValue, holidays } = day;
 
   return (
     <StyledCell isCurrentMonth={isCurrentMonth} isToday={isToday}>
-      {displayValue}
+      <span>{displayValue}</span>
+      {holidays.length > 0 && <HolidayList holidays={holidays} />}
     </StyledCell>
   );
 };
