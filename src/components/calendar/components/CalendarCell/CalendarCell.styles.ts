@@ -1,11 +1,17 @@
 import styled from "@emotion/styled";
 import { palette } from "@styles/palette";
 
-export const StyledCell = styled.div<{ isCurrentMonth: boolean; isToday: boolean }>`
+export const StyledCell = styled.div<{
+  isCurrentMonth: boolean;
+  isToday: boolean;
+  isEditable: boolean;
+}>`
   padding: 10px;
   font-size: 18px;
   font-weight: ${({ isCurrentMonth }) => (isCurrentMonth ? 600 : 400)};
   border-radius: 4px;
+  border: ${({ isEditable }) =>
+    isEditable ? `2px solid ${palette.accent.transparent50}` : "none"};
   background-color: ${({ isCurrentMonth, isToday }) =>
     isToday
       ? palette.accent.transparent25
@@ -14,6 +20,7 @@ export const StyledCell = styled.div<{ isCurrentMonth: boolean; isToday: boolean
         : palette.background.secondary};
   color: ${({ isCurrentMonth }) =>
     isCurrentMonth ? palette.text.primary : palette.text.secondary};
+  cursor: pointer;
 
   max-height: 16.5vh;
   overflow-y: auto;

@@ -12,7 +12,7 @@ export const Header = ({ currentDate, goToNextMonth, goToPreviousMonth }: Props)
   return (
     <Container>
       <Button onClick={goToPreviousMonth}>{"<"}</Button>
-      <span>{currentDate.format("MMMM YYYY")}</span>
+      <h4>{currentDate.format("MMMM YYYY")}</h4>
       <Button onClick={goToNextMonth}>{">"}</Button>
     </Container>
   );

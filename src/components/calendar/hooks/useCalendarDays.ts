@@ -7,7 +7,7 @@ export type CalendarDayType = {
   date: dayjs.Dayjs;
   isCurrentMonth: boolean;
   isToday: boolean;
-  displayValue: string;
+  monthDay: string;
   holidays: string[];
 };
 
@@ -32,7 +32,7 @@ export const useCalendarDays = (
         date,
         isCurrentMonth: false,
         isToday: false,
-        displayValue: getDisplayValue(date, isFirst, isLast),
+        monthDay: getDisplayValue(date, isFirst, isLast),
         holidays: holidays[date.format("YYYY-MM-DD")] || []
       };
     });
@@ -45,7 +45,7 @@ export const useCalendarDays = (
         date,
         isCurrentMonth: true,
         isToday: date.isSame(dayjs(), "day"),
-        displayValue: getDisplayValue(date, isFirst, isLast),
+        monthDay: getDisplayValue(date, isFirst, isLast),
         holidays: holidays[date.format("YYYY-MM-DD")] || []
       };
     });
@@ -59,7 +59,7 @@ export const useCalendarDays = (
         date,
         isCurrentMonth: false,
         isToday: false,
-        displayValue: getDisplayValue(date, isFirst, isLast),
+        monthDay: getDisplayValue(date, isFirst, isLast),
         holidays: holidays[date.format("YYYY-MM-DD")] || []
       };
     });

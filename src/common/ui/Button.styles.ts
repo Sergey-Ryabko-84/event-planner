@@ -1,17 +1,11 @@
 import styled from "@emotion/styled";
-import { palette } from "@styles/palette";
+import { BaseControl } from "./BaseControl.styles";
 
-export const Button = styled.button`
-  background-color: ${palette.background.primary};
+export const Button = styled(BaseControl.withComponent("button"))`
   border: none;
-  font-size: 16px;
   cursor: pointer;
-  color: ${palette.text.secondary};
-  padding: 8px 16px;
-  border-radius: 4px;
 
   &:hover {
-    color: ${palette.accent.main};
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 

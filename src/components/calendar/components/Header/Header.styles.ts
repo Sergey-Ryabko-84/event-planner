@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { palette } from "@styles/palette";
 
 export const Container = styled.header`
   display: flex;
@@ -6,9 +7,9 @@ export const Container = styled.header`
   align-items: center;
   padding: 14px;
 
-  span {
+  h4 {
     font-size: 18px;
-    font-weight: bold;
+    color: ${palette.text.calendarTitle};
   }
 
   button {

@@ -8,4 +8,5 @@ export const HolidayLabel = styled.div`
   background-color: ${palette.accent.transparent25};
   border-radius: 4px;
   padding: 2px 8px;
+  cursor: text;
 `;
