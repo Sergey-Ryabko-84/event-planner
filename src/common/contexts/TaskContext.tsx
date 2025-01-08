@@ -1,5 +1,5 @@
-import { createContext, useState, ReactNode, Dispatch, SetStateAction } from "react";
-import { Dayjs } from "dayjs";
+import { createContext, useState, ReactNode, Dispatch, SetStateAction, useEffect } from "react";
+import dayjs, { Dayjs } from "dayjs";
 import { TaskType } from "@common/types";
 
 export type TaskContextType = {
@@ -25,8 +25,22 @@ const initialContext: TaskContextType = {
 export const TaskContext = createContext<TaskContextType>(initialContext);
 
 export const TaskProvider = ({ children }: { children: ReactNode }) => {
-  const [tasks, setTasks] = useState<TaskType[]>(initialContext.tasks);
+  const savedTasks = localStorage.getItem("tasks");
+  const parsedTasks = savedTasks
+    ? JSON.parse(savedTasks).map((task: TaskType) => ({
+        ...task,
+        date: dayjs(task.date)
+      }))
+    : [];
+
+  const [tasks, setTasks] = useState<TaskType[]>(parsedTasks);
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    if (tasks.length > 0) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+  }, [tasks]);
 
   const addTask = (task: TaskType) => {
     setTasks((prevTasks) => [...prevTasks, task]);
@@ -42,11 +56,14 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
+  const matchesSearchQuery = (title: string, query: string) =>
+    title.toLowerCase().includes(query.toLowerCase());
+
   const getTasksByDate = (date: Dayjs) => {
     return tasks.filter(
       (task) =>
-        task.date === date &&
-        (!searchQuery || task.title.toLowerCase().includes(searchQuery.toLowerCase()))
+        dayjs(task.date).isSame(date, "day") &&
+        (!searchQuery || matchesSearchQuery(task.title, searchQuery))
     );
   };
 

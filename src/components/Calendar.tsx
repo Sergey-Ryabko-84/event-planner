@@ -2,6 +2,7 @@ import { TaskProvider } from "@common/contexts";
 import { Container } from "./Calendar.styles";
 import { CalendarGrid, Header, useCalendarDays, useCurrentDate, WeekDays } from "./calendar";
 import { HolidaySwitcher, useHolidaySettings } from "./holidays";
+import { TaskFilter } from "./tasks";
 
 export const Calendar = () => {
   const { currentDate, goToNextMonth, goToPreviousMonth } = useCurrentDate();
@@ -16,6 +17,7 @@ export const Calendar = () => {
           goToNextMonth={goToNextMonth}
           goToPreviousMonth={goToPreviousMonth}
         />
+        <TaskFilter />
         <HolidaySwitcher
           mode={mode}
           toggleMode={toggleMode}

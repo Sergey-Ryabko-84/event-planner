@@ -25,5 +25,23 @@ export const palette = {
     transparent35: "rgba(233, 84, 32, 0.35)",
     transparent50: "rgba(233, 84, 32, 0.50)",
     transparent75: "rgba(233, 84, 32, 0.75)"
+  },
+  success: {
+    light: "#81c784",
+    main: "#4caf50",
+    dark: "#388e3c",
+    contrastText: "#fff"
+  },
+  info: {
+    light: "#64b5f6",
+    main: "#2196f3",
+    dark: "#1976d2",
+    contrastText: "#fff"
+  },
+  error: {
+    light: "#ff7961",
+    main: "#f44336",
+    dark: "#ba000d",
+    contrastText: "#fff"
   }
 };

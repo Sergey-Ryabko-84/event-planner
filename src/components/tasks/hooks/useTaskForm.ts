@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useTaskContext } from "@common/contexts";
-import { TaskType } from "@common/types";
+import { TaskCategory, TaskType } from "@common/types";
 import { Dayjs } from "dayjs";
 
 export const useTaskForm = (
@@ -11,13 +11,13 @@ export const useTaskForm = (
 ) => {
   const { tasks } = useTaskContext();
   const [title, setTitle] = useState(initialTask?.title || "");
-  const [categories, setCategories] = useState<string[]>(initialTask?.categories || []);
+  const [categories, setCategories] = useState<TaskCategory[]>(initialTask?.categories || []);
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const handleCategoryToggle = (category: string) => {
+  const handleCategoryToggle = (category: TaskCategory) => {
     setCategories((prev) =>
       prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
     );

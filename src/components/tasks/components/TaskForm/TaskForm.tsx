@@ -1,18 +1,23 @@
 import { useEffect, useRef } from "react";
 import { Dayjs } from "dayjs";
-import { Button, DialogOverlay } from "@common/ui";
+import { DialogOverlay } from "@common/ui";
+import { useTaskContext } from "@common/contexts";
 import { MousePositionType } from "@common/hooks";
-import { TaskType } from "@common/types";
+import { TaskCategory, TaskType } from "@common/types";
 import { palette } from "@styles/palette";
 import { useTaskForm } from "@components/tasks/hooks";
 import {
   ButtonWrapper,
+  CancelButton,
   Checkbox,
   CheckboxGroup,
   CheckboxWrapper,
+  DeleteButton,
   FormWrapper,
   Input,
-  Title
+  SuccessButton,
+  Title,
+  TitleWrapper
 } from "./TaskForm.styles";
 
 type Props = {
@@ -31,6 +36,7 @@ export const TaskForm = ({ onSubmit, onClose, position, date, initialTask }: Pro
     initialTask
   );
   const titleInputRef = useRef<HTMLInputElement>(null);
+  const { deleteTask } = useTaskContext();
 
   useEffect(() => {
     if (!initialTask && titleInputRef.current) {
@@ -41,7 +47,14 @@ export const TaskForm = ({ onSubmit, onClose, position, date, initialTask }: Pro
   return (
     <DialogOverlay onClose={onClose}>
       <FormWrapper onClick={(e) => e.stopPropagation()} onSubmit={handleSubmit} position={position}>
-        <Title>{initialTask ? "Task Details" : "Add Task"}</Title>
+        <TitleWrapper>
+          <Title>{initialTask ? "Task Details" : "Add Task"}</Title>
+          {initialTask && (
+            <DeleteButton type="button" onClick={() => deleteTask(initialTask.id)}>
+              Delete
+            </DeleteButton>
+          )}
+        </TitleWrapper>
         <Input
           type="text"
           placeholder="Enter task title"
@@ -50,7 +63,6 @@ export const TaskForm = ({ onSubmit, onClose, position, date, initialTask }: Pro
           required
           ref={titleInputRef}
         />
-
         <CheckboxWrapper>
           <h4>Choose categories:</h4>
           <CheckboxGroup>
@@ -58,8 +70,8 @@ export const TaskForm = ({ onSubmit, onClose, position, date, initialTask }: Pro
               <label key={category}>
                 <Checkbox
                   type="checkbox"
-                  onChange={() => handleCategoryToggle(category)}
-                  checked={categories.includes(category)}
+                  onChange={() => handleCategoryToggle(category as TaskCategory)}
+                  checked={categories.includes(category as TaskCategory)}
                   color={color}
                 />
                 {category}
@@ -67,12 +79,11 @@ export const TaskForm = ({ onSubmit, onClose, position, date, initialTask }: Pro
             ))}
           </CheckboxGroup>
         </CheckboxWrapper>
-
         <ButtonWrapper>
-          <Button type="submit">{initialTask ? "Update" : "Add"}</Button>
-          <Button type="button" onClick={onClose}>
+          <SuccessButton type="submit">{initialTask ? "Change" : "Add"}</SuccessButton>
+          <CancelButton type="button" onClick={onClose}>
             Cancel
-          </Button>
+          </CancelButton>
         </ButtonWrapper>
       </FormWrapper>
     </DialogOverlay>
