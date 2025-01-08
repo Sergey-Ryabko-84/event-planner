@@ -2,6 +2,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { useTaskContext } from "@common/contexts";
 import { TaskCategory, TaskType } from "@common/types";
 import { Dayjs } from "dayjs";
+import { getNextOrder } from "../utils";
 
 export const useTaskForm = (
   onSubmit: (task: TaskType) => void,
@@ -28,7 +29,7 @@ export const useTaskForm = (
     if (!title.trim()) return;
     const newTask: TaskType = {
       id: initialTask?.id || String(Date.now()),
-      order: initialTask?.order || tasks.length,
+      order: initialTask?.order || getNextOrder(tasks),
       title,
       categories,
       date
