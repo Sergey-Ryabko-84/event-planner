@@ -1,3 +1,5 @@
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { TaskProvider } from "@common/contexts";
 import { Container } from "./Calendar.styles";
 import { CalendarGrid, Header, useCalendarDays, useCurrentDate, WeekDays } from "./calendar";
@@ -25,7 +27,9 @@ export const Calendar = () => {
           changeCountry={changeCountry}
         />
         <WeekDays />
-        <CalendarGrid days={days} />
+        <DndProvider backend={HTML5Backend}>
+          <CalendarGrid days={days} />
+        </DndProvider>
       </TaskProvider>
     </Container>
   );

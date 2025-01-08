@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { palette } from "@styles/palette";
 import { TaskCategory } from "@common/types";
 
-export const TaskWrapper = styled.div`
+export const TaskWrapper = styled.div<{ isDragging: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -13,6 +13,7 @@ export const TaskWrapper = styled.div`
   color: ${palette.text.primary};
   background-color: ${palette.background.card};
   border-radius: 4px;
+  opacity: ${({ isDragging }) => (isDragging ? 0.5 : 1)};
 
   transition: transform 0.2s;
 

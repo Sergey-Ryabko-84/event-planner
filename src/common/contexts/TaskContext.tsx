@@ -10,6 +10,7 @@ export type TaskContextType = {
   getTasksByDate: (date: Dayjs) => TaskType[];
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
+  moveTask: (fromIndex: number, toIndex: number) => void;
 };
 
 const initialContext: TaskContextType = {
@@ -19,7 +20,8 @@ const initialContext: TaskContextType = {
   deleteTask: () => {},
   getTasksByDate: () => [],
   searchQuery: "",
-  setSearchQuery: () => {}
+  setSearchQuery: () => {},
+  moveTask: () => {}
 };
 
 export const TaskContext = createContext<TaskContextType>(initialContext);
@@ -69,6 +71,18 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     return filtered.sort((a, b) => a.order - b.order);
   };
 
+  const moveTask = (fromIndex: number, toIndex: number) => {
+    const updatedTasks = Array.from(tasks);
+    const [movedTask] = updatedTasks.splice(fromIndex, 1);
+    updatedTasks.splice(toIndex, 0, movedTask);
+    const reorderedTasks = updatedTasks.map((task, index) => ({
+      ...task,
+      order: index + 1
+    }));
+
+    setTasks(reorderedTasks);
+  };
+
   return (
     <TaskContext.Provider
       value={{
@@ -78,7 +92,8 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         deleteTask,
         getTasksByDate,
         searchQuery,
-        setSearchQuery
+        setSearchQuery,
+        moveTask
       }}>
       {children}
     </TaskContext.Provider>

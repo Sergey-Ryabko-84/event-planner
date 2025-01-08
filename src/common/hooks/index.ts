@@ -1,2 +1,2 @@
-export * from "./useDialog.ts";
-export * from "./useDebounce.ts";
+export * from "./useDialog";
+export * from "./useDebounce";
