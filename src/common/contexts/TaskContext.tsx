@@ -60,11 +60,13 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     title.toLowerCase().includes(query.toLowerCase());
 
   const getTasksByDate = (date: Dayjs) => {
-    return tasks.filter(
+    const filtered = tasks.filter(
       (task) =>
         dayjs(task.date).isSame(date, "day") &&
         (!searchQuery || matchesSearchQuery(task.title, searchQuery))
     );
+
+    return filtered.sort((a, b) => a.order - b.order);
   };
 
   return (
