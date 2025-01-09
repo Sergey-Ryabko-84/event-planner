@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Dayjs } from "dayjs";
 import { DialogOverlay } from "@common/ui";
-import { useTaskContext } from "@common/contexts";
 import { MousePositionType } from "@common/hooks";
 import { TaskCategory, TaskType } from "@common/types";
 import { palette } from "@styles/palette";
@@ -29,14 +28,9 @@ type Props = {
 };
 
 export const TaskForm = ({ onSubmit, onClose, position, date, initialTask }: Props) => {
-  const { title, categories, handleTitleChange, handleCategoryToggle, handleSubmit } = useTaskForm(
-    onSubmit,
-    onClose,
-    date,
-    initialTask
-  );
+  const { title, categories, handleTitleChange, handleCategoryToggle, handleSubmit, handleDelete } =
+    useTaskForm(onSubmit, onClose, date, initialTask);
   const titleInputRef = useRef<HTMLInputElement>(null);
-  const { deleteTask } = useTaskContext();
 
   useEffect(() => {
     if (!initialTask && titleInputRef.current) {
@@ -50,7 +44,7 @@ export const TaskForm = ({ onSubmit, onClose, position, date, initialTask }: Pro
         <TitleWrapper>
           <Title>{initialTask ? "Task Details" : "Add Task"}</Title>
           {initialTask && (
-            <DeleteButton type="button" onClick={() => deleteTask(initialTask.id)}>
+            <DeleteButton type="button" onClick={handleDelete}>
               Delete
             </DeleteButton>
           )}

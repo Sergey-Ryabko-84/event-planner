@@ -10,6 +10,7 @@ type Return = {
   handleTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleCategoryToggle: (category: TaskCategory) => void;
   handleSubmit: (e: FormEvent) => void;
+  handleDelete: () => void;
 };
 
 export const useTaskForm = (
@@ -18,7 +19,7 @@ export const useTaskForm = (
   date: Dayjs,
   initialTask?: TaskType
 ): Return => {
-  const { tasks } = useTaskContext();
+  const { tasks, deleteTask } = useTaskContext();
   const [title, setTitle] = useState(initialTask?.title || "");
   const [categories, setCategories] = useState<TaskCategory[]>(initialTask?.categories || []);
 
@@ -46,11 +47,18 @@ export const useTaskForm = (
     onClose();
   };
 
+  const handleDelete = () => {
+    if (!initialTask) return;
+    deleteTask(initialTask.id);
+    onClose();
+  };
+
   return {
     title,
     categories,
     handleTitleChange,
     handleCategoryToggle,
-    handleSubmit
+    handleSubmit,
+    handleDelete
   };
 };
