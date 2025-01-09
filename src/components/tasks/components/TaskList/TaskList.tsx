@@ -9,7 +9,7 @@ export const TaskList = ({ tasks }: Props) => {
   return (
     <>
       {tasks.map((task, index) => (
-        <TaskItem key={index} task={task} index={index} />
+        <TaskItem key={index} task={task} />
       ))}
     </>
   );

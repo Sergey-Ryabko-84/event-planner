@@ -1,24 +1,38 @@
-import { useRef } from "react";
+import { RefObject, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import { TaskType } from "@common/types";
+
+type DragItem = {
+  task: TaskType;
+};
+
+type Return = {
+  ref: RefObject<HTMLDivElement>;
+  isDragging: boolean;
+};
 
 export const useTaskDragAndDrop = (
-  index: number,
-  moveTask: (fromIndex: number, toIndex: number) => void
-) => {
+  task: TaskType,
+  moveTask: (fromTaskId: string, toTaskId: string) => void,
+  updateTask: (updatedTask: TaskType) => void
+): Return => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drop] = useDrop({
     accept: "TASK",
-    drop(item: { index: number }) {
-      if (item.index !== index) {
-        moveTask(item.index, index);
+    drop: (item: DragItem) => {
+      if (item.task.id !== task.id && item.task.date.isSame(task.date, "day")) {
+        moveTask(item.task.id, task.id);
+      } else if (item.task.id !== task.id && !item.task.date.isSame(task.date, "day")) {
+        const updatedTask = { ...item.task, date: task.date };
+        updateTask(updatedTask);
       }
     }
   });
 
   const [{ isDragging }, drag] = useDrag({
     type: "TASK",
-    item: { index },
+    item: { task },
     collect: (monitor) => ({
       isDragging: monitor.isDragging()
     })

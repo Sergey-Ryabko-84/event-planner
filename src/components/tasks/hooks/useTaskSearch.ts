@@ -2,7 +2,13 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useTaskContext } from "@common/contexts";
 import { useDebounce } from "@common/hooks";
 
-export const useTaskSearch = () => {
+type Return = {
+  inputValue: string;
+  handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleClearSearch: () => void;
+};
+
+export const useTaskSearch = (): Return => {
   const { searchQuery, setSearchQuery } = useTaskContext();
   const [inputValue, setInputValue] = useState(searchQuery);
   const debouncedSearchQuery = useDebounce(inputValue);

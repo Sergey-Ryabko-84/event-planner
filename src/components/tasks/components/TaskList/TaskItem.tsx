@@ -1,18 +1,18 @@
+import { TaskType } from "@common/types";
+import { TaskForm } from "@components/tasks";
+import { Category, CategoryWrapper, TaskWrapper } from "./TaskItem.styles";
 import { useTaskContext } from "@common/contexts";
 import { useDialog } from "@common/hooks";
-import { TaskType } from "@common/types";
-import { TaskForm, useTaskDragAndDrop } from "@components/tasks";
-import { Category, CategoryWrapper, TaskWrapper } from "./TaskItem.styles";
+import { useTaskDragAndDrop } from "@components/tasks";
 
 type Props = {
   task: TaskType;
-  index: number;
 };
 
-export const TaskItem = ({ task, index }: Props) => {
+export const TaskItem = ({ task }: Props) => {
   const { isDialogOpen, mousePosition, handleDialogClose, handleDialogOpen } = useDialog();
   const { updateTask, moveTask } = useTaskContext();
-  const { ref, isDragging } = useTaskDragAndDrop(index, moveTask);
+  const { ref, isDragging } = useTaskDragAndDrop(task, moveTask, updateTask);
 
   return (
     <>

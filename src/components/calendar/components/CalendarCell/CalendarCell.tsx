@@ -2,7 +2,7 @@ import { useTaskContext } from "@common/contexts";
 import { useDialog } from "@common/hooks";
 import { HolidayList } from "@components/holidays";
 import { TaskForm, TaskList } from "@components/tasks";
-import { CalendarDayType } from "../../hooks";
+import { CalendarDayType, useCalendarCellDragAndDrop } from "../../hooks";
 import { CellTitle } from "./CellTitle";
 import { StyledCell } from "./CalendarCell.styles";
 
@@ -17,9 +17,12 @@ export const CalendarCell = ({ day }: Props) => {
 
   const tasks = getTasksByDate(date);
 
+  const { dropRef } = useCalendarCellDragAndDrop(date);
+
   return (
     <>
       <StyledCell
+        ref={dropRef}
         isCurrentMonth={isCurrentMonth}
         isToday={isToday}
         onClick={handleDialogOpen}

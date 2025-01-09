@@ -10,7 +10,7 @@ export type TaskContextType = {
   getTasksByDate: (date: Dayjs) => TaskType[];
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
-  moveTask: (fromIndex: number, toIndex: number) => void;
+  moveTask: (fromTaskId: string, toTaskId: string) => void;
 };
 
 const initialContext: TaskContextType = {
@@ -71,16 +71,39 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     return filtered.sort((a, b) => a.order - b.order);
   };
 
-  const moveTask = (fromIndex: number, toIndex: number) => {
-    const updatedTasks = Array.from(tasks);
-    const [movedTask] = updatedTasks.splice(fromIndex, 1);
-    updatedTasks.splice(toIndex, 0, movedTask);
-    const reorderedTasks = updatedTasks.map((task, index) => ({
-      ...task,
-      order: index + 1
-    }));
+  const moveTask = (fromTaskId: string, toTaskId: string) => {
+    setTasks((prevTasks) => {
+      const fromTask = prevTasks.find((task) => task.id === fromTaskId);
+      const toTask = prevTasks.find((task) => task.id === toTaskId);
 
-    setTasks(reorderedTasks);
+      if (!fromTask || !toTask || !fromTask.date.isSame(toTask.date, "day")) {
+        return prevTasks;
+      }
+
+      const sameDayTasks = prevTasks.filter((task) => task.date.isSame(fromTask.date, "day"));
+
+      const sortedTasks = sameDayTasks.sort((a, b) => a.order - b.order);
+
+      const updatedTasks = sortedTasks.map((task) => {
+        if (task.id === fromTaskId) {
+          return { ...task, order: toTask.order };
+        } else if (fromTask.order < toTask.order) {
+          if (task.order > fromTask.order && task.order <= toTask.order) {
+            return { ...task, order: task.order - 1 };
+          }
+        } else if (fromTask.order > toTask.order) {
+          if (task.order < fromTask.order && task.order >= toTask.order) {
+            return { ...task, order: task.order + 1 };
+          }
+        }
+        return task;
+      });
+
+      return prevTasks.map((task) => {
+        const updatedTask = updatedTasks.find((t) => t.id === task.id);
+        return updatedTask ? updatedTask : task;
+      });
+    });
   };
 
   return (
