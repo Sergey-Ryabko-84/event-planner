@@ -4,7 +4,7 @@ Event Planner is a React-based web application designed to help users efficientl
 
 ## Live Demo
 
-Check out the live version of the application here: [Event Planner on Vercel](https://event-planner-rlb939lpj-sergey-ryabko-84s-projects.vercel.app)
+Check out the live version of the application here: [Event Planner on Vercel](https://event-planner-git-main-sergey-ryabko-84s-projects.vercel.app/)
 
 ## Repository
 
