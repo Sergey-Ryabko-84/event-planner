@@ -1,50 +1,92 @@
-# React + TypeScript + Vite
+# Event Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Event Planner is a React-based web application designed to help users efficiently organize and manage their tasks and events. It features drag-and-drop functionality for rearranging tasks, searching by title, task management across different dates, and displaying public holidays.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Check out the live version of the application here: [Event Planner on Vercel](https://event-planner-m0l69vnk0-sergey-ryabko-84s-projects.vercel.app/)
 
-## Expanding the ESLint configuration
+## Repository
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The source code is available on GitHub: [Event Planner Repository](https://github.com/Sergey-Ryabko-84/event-planner)
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Task Management**: Add, update, delete, and view tasks.
+- **Drag-and-Drop**: Reorder tasks within the same day or move tasks between different days.
+- **Search Functionality**: Search for tasks by title.
+- **Local Storage**: Tasks are saved locally to persist data between sessions.
+- **Dynamic Task Sorting**: Tasks are automatically sorted based on their order within the same day.
+- **Holiday Display**: Public holidays are shown to provide better task planning.
+
+## Technology Stack
+
+- **Frontend**: React, TypeScript
+- **State Management**: React Context API
+- **Date Manipulation**: Day.js
+- **Drag-and-Drop**: React DnD
+- **Deployment**: Vercel
+
+## Installation
+
+To run the application locally, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Sergey-Ryabko-84/event-planner.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd event-planner
+   ```
+
+3. Install dependencies using Yarn:
+
+   ```bash
+   yarn install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   yarn dev
+   ```
+
+5. Open your browser and navigate to `http://localhost:5173`.
+
+## Usage
+
+1. **Adding Tasks**:
+   - Click the "Add Task" button and fill in the task details.
+2. **Reordering Tasks**:
+   - Drag and drop tasks to reorder them within the same day or move them to another day.
+3. **Searching Tasks**:
+   - Use the search bar to filter tasks by title.
+4. **Deleting Tasks**:
+   - Click the delete icon next to a task to remove it.
+
+## Folder Structure
+
+```
+├── public          # Static files
+├── src
+│   ├── common      # Shared components, types and utilities
+│   ├── api         # API-related functions
+│   ├── components  # Reusable components (e.g., Calendar, TaskForm)
+│   └── styles      # Global and component-specific styles
+├── README.md       # Project documentation
+└── package.json    # Project dependencies and scripts
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Future Enhancements
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- **Backend Integration**: Add a backend for user authentication and cloud data storage.
+- **Recurring Tasks**: Support for recurring tasks and reminders.
+- **Mobile Responsiveness**: Improve UI for smaller screens.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+---
+
+Thank you for checking out Event Planner! If you encounter any issues or have feature suggestions, feel free to open an issue in the repository.
